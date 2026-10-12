@@ -8,4 +8,4 @@ Currently, the primary supported branch is `main`.
 
 We use GitHub Private Vulnerability Reporting for all security issues. Please do not report security vulnerabilities through public GitHub issues.
 
-To report a security vulnerability, please go to the [Security tab](../../security/advisories/new) of this repository and report it privately.
+To report a security vulnerability, please go to the [Security tab](https://github.com/Koality-Assured/koality-blog/security/advisories/new) of this repository and report it privately.
