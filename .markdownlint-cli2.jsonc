@@ -1,0 +1,28 @@
+// Markdownlint configuration for koality-blog.
+// Matches organization conventions:
+// - Pragmatic rules for articles with YAML front matter
+// - Ignores line length limits and cosmetic linebreaks/HTML for banners
+{
+  "config": {
+    "default": true,
+    "MD009": false,
+    "MD010": false,
+    "MD012": false,
+    "MD013": false,
+    "MD026": false,
+    "MD031": false,
+    "MD032": false,
+    "MD033": false,
+    "MD036": false,
+    "MD041": false,
+    "MD025": {
+      "front_matter_title": ""
+    }
+  },
+  "noInlineConfig": true,
+  "ignores": [
+    "scratch/**",
+    "node_modules/**",
+    ".git/**"
+  ]
+}
