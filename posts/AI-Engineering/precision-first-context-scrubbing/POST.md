@@ -105,4 +105,4 @@ The results support measuring both false positives and false negatives on worklo
 
 ---
 
-*For the confusion matrix, fixture limits, and reproduction instructions, read the full white paper: [Precision-First Context Scrubbing: Measuring Synthetic Format-Marker Detection and Finding-Output Size](/wp/precision-first-context-scrubbing).*
+*For the confusion matrix, fixture limits, and reproduction instructions, read the full white paper: [Precision-First Context Scrubbing: Measuring Synthetic Format-Marker Detection and Finding-Output Size](https://ketron.dev/wp/precision-first-context-scrubbing).*
