@@ -51,6 +51,7 @@ The regex baseline produced **46 false positives**: 10 card-shaped matches, 8 SS
 The pinned `koality-pii-scanner` source combines regular-expression candidate extraction with structural and contextual checks. The benchmark shows the resulting trade-off on its test markers; it does not establish that every actual leak will be detected:
 
 ### 1. Credit Cards: Luhn Checksum + IIN Network Ranges
+
 A candidate number between 13 and 19 digits must first match an allocated Issuer Identification Number (IIN) per ISO/IEC 7812 (e.g. Visa `4`, Mastercard `51-55` or `2221-2720`, Amex `34/37`). Then, it must satisfy the modulus-10 **Luhn algorithm**:
 
 $$S = \sum_{i=0}^{n-1} f(d_i, i) \equiv 0 \pmod{10}$$
@@ -58,6 +59,7 @@ $$S = \sum_{i=0}^{n-1} f(d_i, i) \equiv 0 \pmod{10}$$
 An invalid test value may satisfy a broad digit-pattern regex but fail the Luhn check. The benchmark includes labeled negative controls for such values; it does not validate active payment accounts.
 
 ### 2. Network Addresses: Globally Routable Unicast Verification
+
 Instead of naive regex matching on dotted quads, the scanner passes candidate IPs directly to Python's `ipaddress` library and checks `addr.is_global and not addr.is_multicast`.
 
 The implementation excludes address classes such as:
@@ -70,14 +72,17 @@ The implementation excludes address classes such as:
 These implementation rules do not guarantee that every server configuration is free of false alerts; the benchmark measures only its stated fixtures.
 
 ### 3. US SSNs: SSA Structure + Contextual Anchoring
+
 Per the Social Security Administration's randomization rules, area numbers `000`, `666`, and `900–999` are unissued, group `00` is invalid, and serial `0000` is invalid.
 
 For an unformatted nine-digit candidate, the scanner requires **contextual keyword anchoring**: `ssn` or `social security` must appear within 20 non-digit characters. The corpus uses the SSA-invalid `000-12-3456` as a negative control; it does not include positive SSN cases.
 
 ### 4. Emails: RFC 2606 Reserved Domain Suppression
+
 Any email address ending in `.test`, `.example`, `.invalid`, `.localhost`, `example.com`, `example.org`, or `example.net` is suppressed at the token level.
 
 ### 5. Line-Length Skip Behavior and ReDoS Limits
+
 The scanner checks for lines longer than 10,000 characters and records an overlength skip. In one measured call, a 24 KB line was skipped in 46.656 ms. The benchmark did not run an unprotected or adversarial regex, so this observation does not establish ReDoS resistance, a worst-case runtime bound, or elimination of hangs.
 
 ---
