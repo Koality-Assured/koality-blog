@@ -1,12 +1,13 @@
 ---
 title: "Stop Grepping Your Monorepo: Why Layered BM25 and AST Slicing Beat Recursive LLM Dumps"
-deck: "Giving coding agents unrestricted bash access to run recursive grep can dump thousands of unranked tokens into context. A local benchmark found that layered BM25 and AST slicing cut measured context volume by 60%; provider billing was not measured."
+deck: "Giving coding agents unrestricted bash access to run recursive grep can dump thousands of unranked tokens into context. A local benchmark found that scored, bounded retrieval cut measured context volume by 60%; AST outline savings and provider billing were not measured in that run."
 date: 2026-11-04
 domain: AI-Engineering
 author: Robert Ketron
 reading_time: 6 min read
 canonical_url: "https://ketron.dev/blog/stop-grepping-your-monorepo"
 related_whitepaper: "https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/empirical-retrieval-cost-layers/PAPER.md"
+related_whitepaper_route: "https://ketron.dev/wp/empirical-retrieval-cost-layers"
 ---
 
 # Stop Grepping Your Monorepo: Why Layered BM25 and AST Slicing Beat Recursive LLM Dumps
@@ -22,6 +23,8 @@ To a software engineer staring at a terminal, `git grep` is second nature. You s
 To an LLM agent, that output is context the model has to process before it can choose the next file to inspect.
 
 Because the agent cannot inspect the output outside its request context, every unranked match becomes part of the material it must evaluate. In the benchmark's naive arm, that leads to full-file reads and a 29,662-token single-turn context across five retrieval scenarios.
+
+> **Read the companion white paper:** [open the full paper on ketron.dev](https://ketron.dev/wp/empirical-retrieval-cost-layers) for the scenario definitions, context-tax equations, claim-to-evidence ledger, and reproduction steps. The [source paper on GitHub](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/empirical-retrieval-cost-layers/PAPER.md) links the underlying benchmark package.
 
 The effect compounds when the loop retains context across turns.
 
@@ -138,7 +141,7 @@ The `-l 30` flag bounds the returned context around the target section. The cite
 
 ## The empirical proof: a 60% context cut
 
-To measure the real-world difference, we evaluated five canonical developer retrieval scenarios on the `ai-router` production codebase:
+To measure the local difference, we evaluated five canonical developer retrieval scenarios on the `ai-router` production codebase:
 1. Worktree isolation policy and spawning scripts.
 2. AST-grep configuration and pattern extraction.
 3. STRIDE threat model assessment agent spec.
@@ -147,12 +150,12 @@ To measure the real-world difference, we evaluated five canonical developer retr
 
 We ran each scenario under two arms:
 - **Arm A:** Standard shell `git grep` and full-file reading.
-- **Arm B:** Layered QMD BM25 `search`, `ast-grep outline`, and bounded `multi-get`.
+- **Arm B:** Ranked QMD BM25 `search` and bounded `multi-get`. The runner did not invoke `ast-grep`; its separate fixture results are cited above.
 
 | Metric | Arm A (Raw Grep + Read) | Arm B (Layered Retrieval) | Savings |
 | :--- | :---: | :---: | :---: |
 | Single-Turn Context Ingested | 29,662 tokens | 11,746 tokens | **60.40%** |
-| 10-Turn Cumulative Compounding | 296,620 tokens | 117,460 tokens | **179,160 tokens** |
+| 10-Turn Cumulative Input Reads | 296,620 tokens | 117,460 tokens | **179,160 tokens** |
 | Multi-Doc Retrieval Latency | 400.6 ms | 189.3 ms | **~2.12x faster** |
 
 ### What the benchmark does not measure
@@ -171,4 +174,4 @@ If you are building an AI coding harness or an MCP server, apply these three rul
 
 ---
 
-*For the complete mathematical formulation of the Context Tax, our full claim-to-evidence ledger, and the offline reproducible benchmark suite, read the full white paper: [Empirical Retrieval Cost Layers in Autonomous Agent Systems](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/empirical-retrieval-cost-layers/PAPER.md).*
+*For the complete mathematical formulation of the Context Tax, the claim-to-evidence ledger, and the offline reproducible benchmark suite, continue to the [full white paper on ketron.dev](https://ketron.dev/wp/empirical-retrieval-cost-layers) or [read its source on GitHub](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/empirical-retrieval-cost-layers/PAPER.md).*
