@@ -37,6 +37,36 @@ One synthetic run measured token reduction across 15 tool outputs using Headroom
 - [Web version](https://ketron.dev/blog/context-efficiency-methods)
 - [Companion white paper](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/context-efficiency-methods/PAPER.md)
 
+#### The Reveal Route Returns an Envelope: Keeping Secrets Out of Tool Results
+
+Autonomous agents needing credentials can accidentally leak plaintext into conversation history. This note details envelope encryption patterns with opaque surrogate handles (`{{vault:sec_...}}`) and client-side decryption where tools return encrypted envelopes rather than raw secrets.
+
+- **Date:** October 20, 2026
+- **Reading Time:** 5 min read
+- [Read the post](posts/AI-Engineering/reveal-route-returns-envelope/POST.md)
+- [Web version](https://ketron.dev/blog/reveal-route-returns-envelope)
+- [Companion white paper](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/zero-plaintext-vault-reveal/PAPER.md)
+
+#### A 0.95 Gate is Not a Scoreboard: Why Context Scrubbers Must Prioritize Precision Over Noisy Recall
+
+Broad, noisy regex patterns generate false-positive cascades that hallucinate secrets in benign code and inflate tool outputs. This note explains why context scrubbers must enforce a precision-first threshold (>=0.95 precision) and format-marker validation before mutating agent context.
+
+- **Date:** October 27, 2026
+- **Reading Time:** 5 min read
+- [Read the post](posts/AI-Engineering/precision-first-context-scrubbing/POST.md)
+- [Web version](https://ketron.dev/blog/precision-first-context-scrubbing)
+- [Companion white paper](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/precision-first-context-scrubbing/PAPER.md)
+
+#### Stop Grepping Your Monorepo: Why Layered BM25 and AST Slicing Beat Recursive LLM Dumps
+
+Ungrounded grep dumps unranked noise across large codebases, incurring compounding context taxes and cache thrashing. This note demonstrates why multi-layered retrieval—combining BM25 lexical filtering, dense semantic vectors, and AST structural slicing—drastically cuts token consumption while preserving fact precision.
+
+- **Date:** November 4, 2026
+- **Reading Time:** 6 min read
+- [Read the post](posts/AI-Engineering/stop-grepping-your-monorepo/POST.md)
+- [Web version](https://ketron.dev/blog/stop-grepping-your-monorepo)
+- [Companion white paper](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/empirical-retrieval-cost-layers/PAPER.md)
+
 ---
 
 ## Article Format
