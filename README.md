@@ -67,6 +67,16 @@ Ungrounded grep dumps unranked noise across large codebases, incurring compoundi
 - [Web version](https://ketron.dev/blog/stop-grepping-your-monorepo)
 - [Companion white paper](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/empirical-retrieval-cost-layers/PAPER.md)
 
+#### Commit-Bound Proof Gates: Why Agent Verification Needs Exact Git HEAD Checks
+
+Examines how post-proof Git mutations (`--amend`, `rebase`, `cherry-pick`, and trailing commits) evade status-only and ancestry-only verification checks, and presents 31-scenario offline gate measurements, deterministic negative routing, and clean-slate seeded-defect trial results.
+
+- **Date:** November 10, 2026
+- **Reading Time:** 6 min read
+- [Read the post](posts/AI-Engineering/commit-bound-proof-gates/POST.md)
+- [Web version](https://ketron.dev/blog/commit-bound-proof-gates)
+- [Companion white paper](https://github.com/Koality-Assured/koality-whitepapers/blob/main/papers/AI-Engineering/commit-bound-proof-gates/PAPER.md)
+
 ---
 
 ## Article Format
