@@ -1,5 +1,5 @@
 ---
-title: "Threat Modeling an AI Agent: What Happens When Your LLM Has a Bash Tool and a Git Remote"
+title: "Threat Modeling Autonomous Coding Agents"
 deck: "Shell access and Git credentials turn an LLM into a confused-deputy developer principal. Empirical tests on an HTML sanitization filter show why prompt rules fail and which deterministic OS and Git invariants hold."
 date: 2026-11-17
 domain: AI-Engineering
@@ -10,7 +10,7 @@ related_whitepaper: "https://github.com/Koality-Assured/koality-whitepapers/blob
 related_whitepaper_route: "https://ketron.dev/wp/stride-autonomous-coding-agents"
 ---
 
-# Threat Modeling an AI Agent: What Happens When Your LLM Has a Bash Tool and a Git Remote
+# Threat Modeling Autonomous Coding Agents
 
 Granting an LLM a local bash tool and a Git remote turns a stateless text predictor into an active developer workstation principal. Whatever SSH keys, cloud CLI sessions, environment variables, and push rights exist on that host now sit one tool call away from untrusted text entering the context window.
 
